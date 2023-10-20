@@ -90,9 +90,9 @@ ssize_t _getline(char **ptr, size_t *n, FILE *s)
  */
 list_s *_sepend(list_s **head, char s)
 {
-	sep_list *n, *tmp; /*fun */
+       list_s *n, *tmp;
 
-	n = malloc(sizeof(sep_list));
+	n = malloc(sizeof(list_s));
 	if (new == NULL)
 		return (NULL);
 	n->sep = s;
@@ -103,7 +103,7 @@ list_s *_sepend(list_s **head, char s)
 	else
 	{
 		while (tmp->next != NULL)
-			tmp = temp->next;
+			tmp = tmp->next;
 		tmp->next = n;
 	}
 	return (*head);
@@ -114,7 +114,7 @@ list_s *_sepend(list_s **head, char s)
  * @head: sep_list
  * Return: nothing
  */
-void _freeseplist(list_s **head) /* funnnnnnnnnnnnnnnnm*/
+void _freeseplist(list_s **head)
 {
 	list_s *tmp;
 	list_s *current;

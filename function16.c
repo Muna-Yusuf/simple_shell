@@ -133,3 +133,13 @@ char *error_exit_shell(shell_info *datash)
 	free(str);
 	return (err);
 }
+/**
+ * _putchar - function to print.
+ * @c: char.
+ * Return: int
+ */
+
+int _putchar(char c)
+{
+	return (STDOUT_FILENO, &c, _strlen(c);
+}

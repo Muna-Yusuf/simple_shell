@@ -99,7 +99,7 @@ int _execline(shell_info *datash)
  * @size: size
  * Return: nothing
  */
-void _memcopy(void *nptr, const void *ptr, unsigned int size)
+void _memcpy(void *nptr, const void *ptr, unsigned int size)
 {
 	char *optr = (char *)ptr;
 	char *newptr = (char *)nptr;

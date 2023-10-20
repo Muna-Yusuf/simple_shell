@@ -13,7 +13,7 @@ void cd_command(shell_info *infosh)
 	getcwd(command_pwd, sizeof(commmand_pwd));/*function)*/
 	_pwd = _strdup(command_pwd);
 	set_env("OLDPWD", _pwd, infosh);
-	dirct = infosh->argc[i]; /*argc*/
+	dirct = infosh->argc[1]; /*argc*/
 	if (_strcmp(".", dirct) == 0)
 	{
 		set_env("PWD", _pwd, infosh);
@@ -21,14 +21,16 @@ void cd_command(shell_info *infosh)
 		return;
 	}
 	if (_strcmp("/", _pwd) == 0)
+	{
 		free(_pwd);
 		return;
+	}
 	_pwd_cp = _pwd;
 	_strrev(_pwd_cp);
 	_pwd_cp = _strtok(_pwd_cp, "/");
 	if (_pwd_cp != NULL)
 	{
-		_pwd_cp = _strok(NULL, "\0");
+		_pwd_cp = _strtok(NULL, "\0");
 		if (_pwd_cp != NULL)
 		{
 			_strrev(_pwd_cp);
