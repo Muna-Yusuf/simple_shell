@@ -73,29 +73,28 @@ char *swapping(char *input, int bool)
  * @input: char
  * Return: nothing
  */
-void _node_add(list_s **head_s, command_list_s **head_l, char *input)
+void _node_add(list_s **head_s, command_list_s **head_l, char *command)
 {
 	int m;
 	char *l;
 
-	input = swap_char(input, 0);
-	for (m = 0; input[m]; m++)
+	command = swap_char(command, 0);
+	for (m = 0; command[m]; m++)
 	{
-		if (input[m] == ';')
-			add_sep_node_end(head_s, input[m]);
-		if (input[m] == '|' || input[m] == '&')
+		if (command[m] == ';')
+			_sepend(head_s, command[m]);
+		if (command[m] == '|' || command[m] == '&')
 		{
-			add_sep_node_end(head_s, input[m]);
+			_sepend(head_s, command[m]);
 			m++;
 		}
 	}
-	l = _strtok(input, ";|&");
+	l = _strtok(command, ";|&");
 	do {
 		l = swap_char(l, 1);
-		add_line_node_end(head_l, l);
+		_lineend(head_l, l);
 		l = _strtok(NULL, ";|&");
 	} while (l != NULL);
-
 }
 
 /**
@@ -112,22 +111,22 @@ void _node_next(list_s **lists, command_list_s **listl, shell_info *infosh)
 	command_list_s *l;
 
 	m = 1;
-	s = *lists;
+	s = *lists; /*status   s*/
 	l = *listl;
 	while (s != NULL && m)
 	{
 		if (infosh->status == 0)
 		{
-			if (s->separator == '&' || s->separator == ';')
+			if (s->sep == '&' || s->sep == ';')
 				m = 0;
-			if (s->separator == '|')
+			if (s->sep == '|')
 				l = l->next, s = s->next;
 		}
 		else
 		{
-			if (s->separator == '|' || s->separator == ';')
+			if (s->sep == '|' || s->sep == ';')
 				m = 0;
-			if (s->separator == '&')
+			if (s->sep == '&')
 				l = l->next, s = s->next;
 		}
 		if (s != NULL && !m)
@@ -157,7 +156,7 @@ int token_command(shell_info *datash, char *input)
 	while (list_l != NULL)
 	{
 		datash->input = list_l->line;
-		datash->args = split_line(datash->input);
+		datash->argc = split_line(datash->input);
 		flag = exec_line(datash);
 		free(datash->args);
 		if (flag == 0)
@@ -166,8 +165,8 @@ int token_command(shell_info *datash, char *input)
 		if (list_l != NULL)
 			list_l = list_l->next;
 	}
-	free_sep_list(&head_s);
-	free_line_list(&head_l);
+	_freeseplist(&head_s);
+	_freelinelist(&head_l);
 	if (flag == 0)
 		return (0);
 	return (1);

@@ -72,6 +72,10 @@ char *_readline(int *x);
 void _bringline(char **ptr, size_t *n, char *b, size_t k);
 ssize_t _getline(char **ptr, size_t *n, FILE *s);
 void _freelinelist(line_list **head);/**/
+char *error_exit_shell(shell_info *datash);
+char *error_not_found(shell_info *datash);
+void _shloop(shell_info *datash);
+
 /**
  * struct info - strcut.
  * @argv:
