@@ -7,12 +7,12 @@
  */
 void cd_command(shell_info *infosh)
 {
-	char command_pwd[PATH_MAX]; /*pwd*/
-	char *dirct, *_pwd, *_pwd_cp; /*dir, *cp_pwd, *cp_strtok_pwd*/
+	char command_pwd[PATH_MAX];
+	char *dirct, *_pwd, *_pwd_cp;
 
-	getcwd(command_pwd, sizeof(commmand_pwd)); /* fun : getcwd*/
+	getcwd(command_pwd, sizeof(commmand_pwd));/*function)*/
 	_pwd = _strdup(command_pwd);
-	set_env("OLDPWD", _pwd, infosh); /* fun : set_env */
+	set_env("OLDPWD", _pwd, infosh);
 	dirct = infosh->argc[i]; /*argc*/
 	if (_strcmp(".", dirct) == 0)
 	{
@@ -36,7 +36,7 @@ void cd_command(shell_info *infosh)
 	}
 	if (_pwd_cp != NULL)
 	{
-		chdir(_pwd_cp); /*what is this */
+		chdir(_pwd_cp);
 		set_env("PWD", _pwd_cp, infosh);
 	}
 	else
@@ -54,7 +54,7 @@ void cd_command(shell_info *infosh)
  * Return: void.
  */
 
-void cd_command2(shell_info *infosh) /* cd_to(data_shell *datash) */
+void cd_command2(shell_info *infosh)
 {
 	char command_pwd[PATH_MAX];
 	char *dirct, *_pwd, *_pwd_cp;
@@ -64,18 +64,18 @@ void cd_command2(shell_info *infosh) /* cd_to(data_shell *datash) */
 	dirct = infosh->argc[1]; /* args */
 	if (chdir(dirct) == -1)
 	{
-		get_error(infosh, 2); /*function*/
+		get_error(infosh, 2);
 		return;
 	}
 	_pwd = _strdup(command_pwd);
 	set_env("OLDPWD", _pwd, infosh);
 
 	_pwd_cp = _strdup(dirct);
-	set_env("OLDPWD", _pwd_cp, infosh); /* functions */
+	set_env("OLDPWD", _pwd_cp, infosh);
 	free(_pwd);
 	free(_pwd_cp);
 	infosh->s = 0;
-	chdir(dirct); /*function*/
+	chdir(dirct);
 }
 
 /**
@@ -87,11 +87,11 @@ void cd_command_perv(shell_info infosh)
 {
 	char command_pwd[PATH_MAX];
 	char *_pwd_p, *_pwd_o, *_pwd_cp, *_pw_ocp;
-	/**   p_pwd, *p_oldpwd, *cp_pwd, *cp_oldpwd;*/
+
 	getcwd(command_pwd, sizeof(command_pwd)); /* function */
 	_pwd_cp = _strdup(command_pwd);
 
-	_pwd_o = _getenv("OLDPWD", infosh->_environ); /* function */
+	_pwd_o = _getenv("OLDPWD", infosh->_environ);
 	if (_pwd_o == NULL)
 	{
 		_pw_ocp = _pwd_cp;
@@ -101,18 +101,18 @@ void cd_command_perv(shell_info infosh)
 		_pw_ocp = _strdup(_pwd_o)
 	}
 
-	set_env("OLDPWD", _pwd_cp, infosh); /* function */
+	set_env("OLDPWD", _pwd_cp, infosh);
 
-	if (chdir(_pw_ocp) == -1) /* function */
+	if (chdir(_pw_ocp) == -1)
 	{
-		set_env("PWD", _pwd_cp, infosh); /* function */
+		set_env("PWD", _pwd_cp, infosh);
 	}
 	else
 	{
 		set_env("PWD", _pwd_ocp, infosh);
 	}
 
-	_pwd_p = _getenv("PWD", infosh->_environ); /* function */
+	_pwd_p = _getenv("PWD", infosh->_environ);
 
 	_putchar(_pwd_p);
 	_putchar("/n");
@@ -137,20 +137,20 @@ void cd_command_home(shell_info infosh)
 	char pwd_command[PATH_MAX];
 	char *_pwd_p, *p_home;
 
-	getcwd(pwd_command, sizeof(pwd_command));
+	getcwd(pwd_command, sizeof(pwd_command)); /* function */
 	_pwd_p = strdup(pwd_command);
 
 	p_home = _getenv("HOME", infosh->_environ);
 
 	if (p_home == NULL)
 	{
-		set_env("OLDPWD", _pwd_p, infosh); /* function */
+		set_env("OLDPWD", _pwd_p, infosh);
 		free(_pwd_p);
 		return;
 	}
 	if (chdir(p_home) == -1)
 	{
-		get_error(infosh, 2); /* function */
+		get_error(infosh, 2);
 		free(_pwd_p);
 		return;
 	}

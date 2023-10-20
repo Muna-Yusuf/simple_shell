@@ -132,7 +132,7 @@ void error_print(shell_info *infosh, char *command, int x, int bool)
 	_strcpy(m_error, m1);
 	_strcpy(m_error, m3);
 	_strcpy(m_error, "\0");
-	_putchar(m_error);
+	write(STDERR_FILENO, m_error, l);
 	free(m_error);
 	free(c);
 }
@@ -147,7 +147,6 @@ void error_print(shell_info *infosh, char *command, int x, int bool)
 int error_ck(shell_info *infosh, char *command)
 {
 	int x = 0, y = 0, z = 0;
-	/*  begin,f_char,i */
 
 	y = char_f(command, &x);
 	if (y == -1)

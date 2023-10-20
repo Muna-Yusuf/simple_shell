@@ -2,16 +2,16 @@
 
 /**
  * _exec - function
- * @datash: of type data_shell
+ * @infosh: of type data_shell
  * Return: 0 if executable or -1
  */
-int _exec(data_shell *datash)
+int _exec(shell_info *infosh)
 {
 	struct stat st;
 	int m;
 	char *in;
 
-	in = datash->args[0];
+	in = infosh->argc[0];
 	for (m = 0; in[m]; m++)
 	{
 		if (in[m] == '.')
@@ -37,7 +37,7 @@ int _exec(data_shell *datash)
 		return (0);
 	if (stat(in + m, &st) == 0)
 		return (m);
-	get_error(datash, 127);
+	get_error(infosh, 127);
 	return (-1);
 }
 
@@ -78,10 +78,10 @@ int _errcheck(char *d, data_shell *datash)
 
 /**
  * _execute - function to execute cmd
- * @datash: of type data_shell
+ * @infosh: of type data_shell
  * Return: 1
  */
-int _execute(data_shell *datash)
+int _execute(shell_info *infosh)
 {
 	pid_t p;
 	pid_t w;
@@ -89,27 +89,27 @@ int _execute(data_shell *datash)
 	int ex;
 	char *d;
 
-	ex = exec(datash);
+	ex = _exec(infosh);
 	if (ex == -1)
 		return (1);
 	if (ex == 0)
 	{
-		d = _which(datash->args[0], datash->_environ);
-		if (check_error_cmd(d, datash) == 1)
+		d = _which(infosh->argc[0], infosh->_environ);
+		if (_errcheck(d, infosh) == 1)
 			return (1);
 	}
 	p = fork();
 	if (p == 0)
 	{
 		if (ex == 0)
-			d = _which(datash->args[0], datash->_environ);
+			d = _which(infosh->argc[0], infosh->_environ);
 		else
-			d = datash->args[0];
-		execve(d + ex, datash->args, datash->_environ);
+			d = infosh->argc[0];
+		execve(d + ex, infosh->argc, infosh->_environ);
 	}
 	else if (p < 0)
 	{
-		perror(datash->av[0]);
+		perror(infosh->argv[0]);
 		return (1);
 	}
 	else
@@ -118,35 +118,35 @@ int _execute(data_shell *datash)
 			w = waitpid(p, &st, WUNTRACED);
 		} while (!WIFEXITED(state) && !WIFSIGNALED(st));
 	}
-	datash->status = st / 256;
+	infosh->s = st / 256;
 	return (1);
 }
 
 /**
  * _exit - function to exit the shell
- * @datash: of type data_shell
+ * @infosh: of type data_shell
  * Return: 0 or 1
  */
-int _exit(data_shell *datash)
+int _exit(shell_info *infosh)
 {
 	unsigned int st;
 	int d;
 	int len;
 	int num;
 
-	if (datash->args[1] != NULL)
+	if (infosh->argc[1] != NULL)
 	{
-		st = _atoi(datash->args[1]);
-		d = check_digit(datash->args[1]);
-		len = _strlen(datash->args[1]);
+		st = _atoi(infosh->argc[1]);
+		d = check_digit(infosh->argc[1]);
+		len = _strlen(infosh->argc[1]);
 		num = st > (unsigned int)INT_MAX;
 		if (!d || len > 10 || num)
 		{
-			get_error(datash, 2);
-			datash->status = 2;
+			get_error(infosh, 2);
+			infosh->s = 2;
 			return (1);
 		}
-		datash->status = (st % 256);
+		infosh->s = (st % 256);
 	}
 	return (0);
 }

@@ -31,7 +31,7 @@ int _unsetenv(shell_info *infosh)
 
 	if (infosh->argc[1] == NULL)
 	{
-		get_error(infosh, -1); /* function */
+		get_error(infosh, -1);
 		return (1);
 	}
 	for (x = 0; infosh->_environ[x]; x++)
@@ -46,7 +46,7 @@ int _unsetenv(shell_info *infosh)
 	}
 	if (z == -1)
 	{
-		get_error(infosh, -1); /*function*/
+		get_error(infosh, -1);
 		return (1);
 	}
 	env_re = malloc(sizeof(char *) * (x));
@@ -84,11 +84,11 @@ int get_error(shell_info *infosh, int l)
 		error_co = error_126(infosh);
 		break;
 	case 127:
-		error_co = error_not(datash);
+		error_co = error_not(datash); /* function */
 		break;
 	case 2:
 		if (_strcmp("exit", infosh->argc[0]) == 0)
-			error_co = error_exit(infosh);
+			error_co = error_exit(infosh); /* function */
 		else if (_strcmp("cd", infosh->argc[0]) == 0)
 			error = error_cd(infosh);
 		break;
@@ -96,7 +96,7 @@ int get_error(shell_info *infosh, int l)
 
 	if (error_co)
 	{
-		_putchar(error_co);
+		write(STDERR_FILENO, error_co, _strlen(error_co));
 		free(error_co);
 	}
 
@@ -151,7 +151,7 @@ char *error_cd(shell_info *infosh)
 	int len, _len;
 	char *error_co, *value, *m;
 
-	value = itoa(infosh->c);
+	value = _itoa(infosh->c);
 	if (infosh->argc[1][0] == '-')
 	{
 		m = ": Illegal option ";

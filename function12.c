@@ -88,9 +88,9 @@ ssize_t _getline(char **ptr, size_t *n, FILE *s)
  * @s: separator (; | &)
  * Return: sep_list
  */
-sep_list *_sepend(sep_list **head, char s)
+sep_list *_sepend(sep_list **head, char s) /*func we did not */
 {
-	sep_list *n, *tmp;
+	sep_list *n, *tmp; /*fun */
 
 	n = malloc(sizeof(sep_list));
 	if (new == NULL)
@@ -114,7 +114,7 @@ sep_list *_sepend(sep_list **head, char s)
  * @head: sep_list
  * Return: nothing
  */
-void _freeseplist(sep_list **head)
+void _freeseplist(sep_list **head) /* funnnnnnnnnnnnnnnnm*/
 {
 	sep_list *tmp;
 	sep_list *current;

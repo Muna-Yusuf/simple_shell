@@ -73,7 +73,7 @@ char *swapping(char *input, int bool)
  * @input: char
  * Return: nothing
  */
-void _node_add(sep_list **head_s, line_list **head_l, char *input)
+void _node_add(sep_list **head_s, line_list **head_l, char *input) /* strcut */
 {
 	int m;
 	char *l;

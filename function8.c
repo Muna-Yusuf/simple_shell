@@ -46,11 +46,11 @@ char *_getenv(const char *commands, char **_environ)
 }
 
 /**
- * int_env_command - function prints env.
+ * _env - function prints env.
  * @infosh: strcut.
  * Return: int.
  */
-int int_env_command(shell_info *infosh)
+int _env(shell_info *infosh)
 {
 	int x, y;
 
@@ -84,7 +84,7 @@ char *info(char *name, char *value)
 	_strcpy(command, "=");
 	_strcpy(command, value);
 	_strcpy(command, "\0");
-	return (new);
+	return (command);
 }
 
 /**
@@ -115,7 +115,7 @@ void set_env(char *command, char *value, shell_info *infosh)
 		free(env1);
 	}
 
-	infosh->_environ = _reallocdp(infosh->_environ, x, sizeof(char *) * (x + 2)); /* function */
+	infosh->_environ = _reallocdup(infosh->_environ, x, sizeof(char *) * (x + 2));
 	infosh->_environ[x] = info(command, value);
 	infosh->_environ[x + 1] = NULL;
 }

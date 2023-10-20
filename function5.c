@@ -48,10 +48,10 @@ int (*get_builtin(char *cmd))(data_shell *)
 {
 	builtin_t builtin[] = {
 		{ "env", _env },
-		{ "exit", exit_shell },
+		{ "exit", _exit },
 		{ "setenv", _setenv },
 		{ "unsetenv", _unsetenv },
-		{ "cd", cd_shell },
+		{ "cd", shell_command },
 		{ "help", get_help },
 		{ NULL, NULL }
 	};
@@ -77,12 +77,12 @@ void com_get(int s)
 }
 
 /**
- * is_cdir - function
+ * _cdir - function
  * @path: character
  * @x: integer
  * Return: 0 or 1
  */
-int _cdir(char *path, int *x) /*not written in main??????????*/
+int _cdir(char *path, int *x)
 {
 	if (path[*x] == ':')
 		return (1);

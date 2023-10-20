@@ -10,7 +10,7 @@ char *envir_error(shell_info *infosh)
 	int len;
 	char *error_co, *value, *m;
 
-	value = itoa(infosh->c);
+	value = _itoa(infosh->c);
 	m = ": Unable to add/remove from environment\n";
 	len = _strlen(infosh->argv[0]) + _strlen(value);
 	len += _strlen(infosh->argc[0]) + _strlen(m) + 4;
@@ -83,7 +83,7 @@ void _enviro_check(command_var_r **dot, char *i, shell_info *infosh)
 			if (_enviro_b[r][c] == '=')
 			{
 				l = _strlen(_enviro_b[r] + c + 1);
-				add_rvar_node(dot, j, _enviro_b[r] + c + 1, l); /* function */
+				_addrvar(dot, j, _enviro_b[r] + c + 1, l);
 				return;
 			}
 
@@ -100,7 +100,7 @@ void _enviro_check(command_var_r **dot, char *i, shell_info *infosh)
 			break;
 	}
 
-	add_rvar_node(dot, j, NULL, 0); /* function */
+	_addrvar(dot, j, NULL, 0);
 }
 
 /**
@@ -123,19 +123,19 @@ int _vars_ch(command_var_r **dot, char *x, char *str, shell_info *infosh)
 		if (x[i] == '$')
 		{
 			if (x[i + 1] == '?')
-				add_rvar_node(dot, 2, srt, list), i++;
+				_addrvar(dot, 2, srt, list), i++;
 			else if (x[i + 1] == '$')
-				add_rvar_node(dot, 2, infosh->pid, d), i++;
+				_addrvar(dot, 2, infosh->pid, d), i++;
 			else if (x[i + 1] == '\n')
-				add_rvar_node(dot, 0, NULL, 0);
+				_addrvar(dot, 0, NULL, 0);
 			else if (x[i + 1] == '\0')
-				add_rvar_node(dot, 0, NULL, 0);
+				_addrvar(dot, 0, NULL, 0);
 			else if (x[i + 1] == ' ')
-				add_rvar_node(dot, 0, NULL, 0);
+				_addrvar(dot, 0, NULL, 0);
 			else if (x[i + 1] == '\t')
-				add_rvar_node(dot, 0, NULL, 0);
+				_addrvar(dot, 0, NULL, 0);
 			else if (x[i + 1] == ';')
-				add_rvar_node(dot, 0, NULL, 0);
+				_addrvar(dot, 0, NULL, 0);
 			else
 				_enviro_check(dot, x + i, infosh);
 		}
@@ -155,7 +155,7 @@ int _vars_ch(command_var_r **dot, char *x, char *str, shell_info *infosh)
 char *_replaced(command_var_r **dot, char *input, char *input2, int length)
 {
 	r_var *dot_in;
-	int x, y, z; /* i, j, k */
+	int x, y, z;
 
 	dot_in = *dot;
 	for (y = x = 0; x < length; x++)
@@ -177,7 +177,7 @@ char *_replaced(command_var_r **dot, char *input, char *input2, int length)
 			{
 				for (z = 0; z < dot_in->length_value; z++)
 				{
-					new_input[x] = dot_in->value[z];
+					input2[x] = dot_in->value[z];
 					x++;
 				}
 				y += (dot_in->length);
