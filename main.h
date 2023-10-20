@@ -57,7 +57,7 @@ void env_command(const char *xenv, const char *name);
 char *_getenv(const char *commands) /* char **_environ  */
 int int_env_command(data_shell *datash);
 char *info(char *name, char *value);
-
+void cd_command();
 
 /*		structs 	*/
 
@@ -110,5 +110,5 @@ typedef struct command_var /* r_var_list  */
 typedef struct builtin_exe
 {
 	char *command;
-	int (b)(shell_info *infosh);
+	int (b)(shell_info *infosh); /* data_shell *datash */
 } builtin_exe_x;
