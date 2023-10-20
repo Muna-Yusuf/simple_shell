@@ -36,7 +36,7 @@ char *_nocomment(char *in)
  * @datash: data_shell
  * Return: nothing
  */
-void _shloop(data_shell *datash)
+void _shloop(shell_info *datash)
 {
 	int l, i;
 	char *in;
@@ -45,27 +45,91 @@ void _shloop(data_shell *datash)
 	while (l == 1)
 	{
 		write(STDIN_FILENO, "^-^ ", 4);
-		in = read_line(&i);
+		command = read_line(&i);
 		if (i != -1)
 		{
-			in = without_comment(in);
-			if (in == NULL)
+			command = without_comment(command);
+			if (command == NULL)
 				continue;
-			if (check_syntax_error(datash, in) == 1)
+			if (error_ck(datash, command) == 1)
 			{
-				datash->status = 2;
-				free(in);
+				datash->s = 2;
+				free(command);
 				continue;
 			}
-			in = rep_var(in, datash);
-			l = split_commands(datash, in);
-			datash->counter += 1;
-			free(in);
+			command = rep_var(command, datash);
+			l = split_commands(datash, command);
+			datash->c += 1;
+			free(command);
 		}
 		else
 		{
 			l = 0;
-			free(in);
+			free(command);
 		}
 	}
+}
+
+/*
+ * error_not_found - function checks no error
+ * @datash: shell_info
+ * Return: char
+*/
+char *error_not_found(shell_info *datash)
+{
+	int len;
+	char *err;
+	char *str;
+
+	str = _itoa(datash->c);
+	len = _strlen(datash->argv[0]) + _strlen(str);
+	len += _strlen(datash->argc[0]) + 16;
+	err = malloc(sizeof(char) * (len + 1));
+	if (err == 0)
+	{
+		free(err);
+		free(str);
+		return (NULL);
+	}
+	_strcpy(err, datash->argv[0]);
+	_strcat(err, ": ");
+	_strcat(err, str);
+	_strcat(err, ": ");
+	_strcat(err, datash->argc[0]);
+	_strcat(err, ": not found\n");
+	_strcat(err, "\0");
+	free(str);
+	return (err);
+}
+
+/**
+ * error_exit_shell - function for error in exit
+ * @datash: shell_info
+ * Return: char
+ */
+char *error_exit_shell(shell_info *datash)
+{
+	int len;
+	char *err;
+	char *str;
+
+	str = _itoa(datash->c);
+	len = _strlen(datash->argv[0]) + _strlen(str);
+	len += _strlen(datash->argc[0]) + _strlen(datash->argc[1]) + 23;
+	err = malloc(sizeof(char) * (len + 1));
+	if (err == 0)
+	{
+		free(str);
+		return (NULL);
+	}
+	_strcpy(err, datash->argv[0]);
+	_strcat(err, ": ");
+	_strcat(err, str);
+	_strcat(err, ": ");
+	_strcat(err, datash->argc[0]);
+	_strcat(err, ": Illegal number: ");
+	_strcat(err, datash->argc[1]);
+	_strcat(err, "\n\0");
+	free(str);
+	return (err);
 }
