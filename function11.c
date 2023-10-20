@@ -44,22 +44,22 @@ int _exec(shell_info *infosh)
 /**
  * _errcheck - function to check error cmd
  * @d: char
- * @datash: of type data_shell
+ * @infosh: of type data_shell
  * Return: 0 or 1
  */
-int _errcheck(char *d, data_shell *datash)
+int _errcheck(char *d, shell_info *infosh)
 {
 	if (d == NULL)
 	{
-		get_error(datash, 127);
+		get_error(infosh, 127);
 		return (1);
 	}
 
-	if (_strcmp(datash->args[0], d) != 0)
+	if (_strcmp(infosh->argc[0], d) != 0)
 	{
 		if (access(d, X_OK) == -1)
 		{
-			get_error(datash, 126);
+			get_error(infosh, 126);
 			free(d);
 			return (1);
 		}
@@ -67,9 +67,9 @@ int _errcheck(char *d, data_shell *datash)
 	}
 	else
 	{
-		if (access(datash->args[0], X_OK) == -1)
+		if (access(infosh->argc[0], X_OK) == -1)
 		{
-			get_error(datash, 126);
+			get_error(infosh, 126);
 			return (1);
 		}
 	}

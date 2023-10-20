@@ -126,7 +126,7 @@ char *_cd_str(shell_info *infosh, char *m, char *error_co, char *value)
 	{
 		flag = malloc(3);
 		flag[0] = '-';
-		flag[1] = datash->args[1][1];
+		flag[1] = datash->argc[1][1];
 		flag[2] = '\0';
 		_strcat(error_co, flag);
 		free(flag);

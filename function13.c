@@ -5,10 +5,10 @@
  * @head: line_list
  * Return: nothing
  */
-void _freelinelist(line_list **head)
+void _freelinelist(command_list_s **head)
 {
-	line_list *tmp;
-	line_list *current;
+	command_list_s *tmp;
+	command_list_s *current;
 
 	if (head != NULL)
 	{
@@ -30,16 +30,16 @@ void _freelinelist(line_list **head)
  * @val: value length
  * Return: r_var
  */
-r_var *_addrvar(r_var **head, int var, char *value, int val)
+command_var_r *_addrvar(command_var_r **head, int var, char *value, int val)
 {
-	r_var *n, *tmp;
+	command_var_r *n, *tmp;
 
-	n = malloc(sizeof(r_var));
+	n = malloc(sizeof(command_var_r));
 	if (n == NULL)
 		return (NULL);
-	n->len_var = var;
-	n->val = value;
-	n->len_val = val;
+	n->length_value = var;
+	n->value = value; /* this */
+	n->length_value = val;
 	n->next = NULL;
 	tmp = *head;
 	if (tmp == NULL)
@@ -55,13 +55,13 @@ r_var *_addrvar(r_var **head, int var, char *value, int val)
 
 /**
  * _freervar - function to free r_var
- * @head: r_var
+ * @head: struct
  * Return: nothing
  */
-void _freervar(r_var **head)
+void _freervar(command_var_r **head)
 {
-	r_var *tmp;
-	r_var *current;
+	command_var_r *tmp;
+	command_var_r *current;
 
 	if (head != NULL)
 	{
@@ -77,16 +77,16 @@ void _freervar(r_var **head)
 
 /**
  * exec_line - function to execute line
- * @datash: data_shell
+ * @datash: strcut.
  * Return: int
  */
-int _execline(data_shell *datash)
+int _execline(shell_info *datash)
 {
-	int (*builtin)(data_shell *datash);
+	int (*builtin)(shell_info *datash);
 
-	if (datash->args[0] == NULL)
+	if (datash->argc[0] == NULL)
 		return (1);
-	builtin = get_builtin(datash->args[0]);
+	builtin = get_builtin(datash->argc[0]);
 	if (builtin != NULL)
 		return (builtin(datash));
 	return (cmd_exec(datash));
