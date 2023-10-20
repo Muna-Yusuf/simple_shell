@@ -105,7 +105,7 @@ typedef struct command_var /* r_var_list  */
 	char value;
 	int length_value;
 	struct command_var *next;
-} command_var_r;
+} command_var_r; /* r_var */
 
 typedef struct builtin_exe
 {
