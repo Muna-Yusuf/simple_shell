@@ -32,9 +32,9 @@ int _strcmp(char *str1, char *str2);
 
 char *_strchr(char *s, char c); /* this is ?*/
 int _strspn(char *s, char *accept); /* this is */
-int char_comp(char str[]); /*DELIMITER */
+int cmp_chars(char str[], const char *delim);
 int check_digit(const char *s) /* int _isdigit(const char *s) */
-void _strrev(char *str);
+void _strrev(char *s);
 
 
 int _numlen(int num);
@@ -48,7 +48,7 @@ char **tokenization(char *command) /* char **split_line(char *input)  */
 int (*get_builtin(char *cmd))(data_shell *); /* exe_fun  */
 
 
-char *_strtok(char commands[]); /* DELIMITER */
+char *_strtok(char commands[], const char *delim);
 void _free(shell_info *infosh);/* ?????? */
 void com_get(int s); /* void get_sigint(int sig) */
 
