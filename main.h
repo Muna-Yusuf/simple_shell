@@ -98,7 +98,7 @@ void _helpexit(void);
 char *_nocomment(char *in);
 char *error_not_found(shell_info *datash);
 char *error_exit_shell(shell_info *datash);
-
+int _strcmp(char *str1, char *str2);
 /**
  * struct info - strcut.
  * @argv: char.

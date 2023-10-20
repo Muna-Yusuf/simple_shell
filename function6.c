@@ -85,7 +85,7 @@ void cd_command2(shell_info *infosh)
  * @infosh: struct.
  * Return: void.
  */
-void cd_command_perv(shell_info infosh)
+void cd_command_perv(shell_info *infosh)
 {
 	char command_pwd[PATH_MAX];
 	char *_pwd_p, *_pwd_o, *_pwd_cp, *_pw_ocp;
@@ -100,7 +100,7 @@ void cd_command_perv(shell_info infosh)
 	}
 	else
 	{
-		_pw_ocp = _strdup(_pwd_o)
+		_pw_ocp = _strdup(_pwd_o);
 	}
 
 	set_env("OLDPWD", _pwd_cp, infosh);
@@ -111,13 +111,13 @@ void cd_command_perv(shell_info infosh)
 	}
 	else
 	{
-		set_env("PWD", _pwd_ocp, infosh);
+		set_env("PWD", _pw_ocp, infosh);
 	}
 
 	_pwd_p = _getenv("PWD", infosh->_environ);
 
-	_putchar(_pwd_p);
-	_putchar("/n");
+	write(STDOUT_FILENO, _pwd_p, _strlen(_pwd_p));
+	write(STDOUT_FILENO, "\n", 1);
 
 	free(_pwd_cp);
 	if (_pwd_o)
@@ -134,7 +134,7 @@ void cd_command_perv(shell_info infosh)
  * Return: void.
  */
 
-void cd_command_home(shell_info infosh)
+void cd_command_home(shell_info *infosh)
 {
 	char pwd_command[PATH_MAX];
 	char *_pwd_p, *p_home;
