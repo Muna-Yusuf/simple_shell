@@ -30,12 +30,11 @@ char *_itoa(int n);
 int _atoi(char *s);
 int _numlen(int num);
 char *swapping(char *input, int bool);
-void _node_add(sep_list **head_s, line_list **head_l, char *input);/*mnmnm*/
-
-void _node_next(sep_list **list_s, line_list **list_l, data_shell *datash); /***/
+void _node_add(list_s **head_s, command_list_s **head_l, char *input);
+void _node_next(list_s **lists, command_list_s **listl, shell_info *infosh);
 int token_command(data_shell *datash, char *input); /***/
-char **tokenization(char *command)
-int (*get_builtin(char *cmd))(data_shell *);/***/
+char **tokenization(char *command);
+int (*get_builtin(char *cmd))(shell_info *);
 int _cdir(char *path, int *x);
 char *_wh(char *cmd, char **_environ);
 void cd_command(shell_info *infosh);

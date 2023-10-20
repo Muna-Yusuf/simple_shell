@@ -44,7 +44,7 @@ char **tokenization(char *command)
  * @cmd: char
  * Return: command execution
  */
-int (*get_builtin(char *cmd))(data_shell *)
+int (*get_builtin(char *cmd))(shell_info *)
 {
 	builtin_t builtin[] = {
 		{ "env", _env },

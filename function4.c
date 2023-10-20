@@ -73,7 +73,7 @@ char *swapping(char *input, int bool)
  * @input: char
  * Return: nothing
  */
-void _node_add(sep_list **head_s, line_list **head_l, char *input) /* strcut */
+void _node_add(list_s **head_s, command_list_s **head_l, char *input)
 {
 	int m;
 	char *l;
@@ -105,18 +105,18 @@ void _node_add(sep_list **head_s, line_list **head_l, char *input) /* strcut */
  * @datash: of type data_shell
  * Return: nothing
  */
-void _node_next(sep_list **list_s, line_list **list_l, data_shell *datash)
+void _node_next(list_s **lists, command_list_s **listl, shell_info *infosh)
 {
 	int m;
-	sep_list *s;
-	line_list *l;
+	list_s *s;
+	command_list_s *l;
 
 	m = 1;
-	s = *list_s;
-	l = *list_l;
+	s = *lists;
+	l = *listl;
 	while (s != NULL && m)
 	{
-		if (datash->status == 0)
+		if (infosh->status == 0)
 		{
 			if (s->separator == '&' || s->separator == ';')
 				m = 0;
@@ -133,8 +133,8 @@ void _node_next(sep_list **list_s, line_list **list_l, data_shell *datash)
 		if (s != NULL && !m)
 			s = s->next;
 	}
-	*list_s = s;
-	*list_l = l;
+	*lists = s;
+	*listl = l;
 }
 
 /**
@@ -143,10 +143,10 @@ void _node_next(sep_list **list_s, line_list **list_l, data_shell *datash)
  * @input: char
  * Return: 0 or 1
  */
-int token_command(data_shell *datash, char *input)
+int token_command(shell_info *datash, char *input)
 {
-	sep_list *head_s, *list_s;
-	line_list *head_l, *list_l;
+	list_s *head_s, *list_s;
+	command_list_s *head_l, *list_l;
 	int flag;
 
 	head_s = NULL;
