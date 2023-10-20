@@ -90,7 +90,7 @@ ssize_t _getline(char **ptr, size_t *n, FILE *s)
  */
 list_s *_sepend(list_s **head, char s)
 {
-       list_s *n, *tmp;
+	list_s *n, *tmp;
 
 	n = malloc(sizeof(list_s));
 	if (new == NULL)

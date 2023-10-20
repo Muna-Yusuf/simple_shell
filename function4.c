@@ -70,7 +70,7 @@ char *swapping(char *input, int bool)
  * _node_add - function to add nodes
  * @head_s: of type sep_list
  * @head_l: of type line_list
- * @input: char
+ * @command: char
  * Return: nothing
  */
 void _node_add(list_s **head_s, command_list_s **head_l, char *command)
@@ -99,9 +99,9 @@ void _node_add(list_s **head_s, command_list_s **head_l, char *command)
 
 /**
  * _node_next - function to go to the next node
- * @list_s: of type sep_list
- * @list_l: of type line_list
- * @datash: of type data_shell
+ * @lists: of type sep_list
+ * @listl: of type line_list
+ * @infosh: of type data_shell
  * Return: nothing
  */
 void _node_next(list_s **lists, command_list_s **listl, shell_info *infosh)

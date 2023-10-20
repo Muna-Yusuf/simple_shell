@@ -141,5 +141,5 @@ char *error_exit_shell(shell_info *datash)
 
 int _putchar(char c)
 {
-	return (STDOUT_FILENO, &c, _strlen(c);
+	return (STDOUT_FILENO, &c, _strlen(c));
 }

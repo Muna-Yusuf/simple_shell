@@ -76,7 +76,7 @@ void _freervar(command_var_r **head)
 }
 
 /**
- * exec_line - function to execute line
+ * _execline - function to execute line
  * @datash: strcut.
  * Return: int
  */
@@ -93,7 +93,7 @@ int _execline(shell_info *datash)
 }
 
 /**
- * _memcopy - functopn to copy
+ * _memcpy - functopn to copy
  * @nptr: new pointer
  * @ptr: pointer
  * @size: size
