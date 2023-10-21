@@ -30,7 +30,7 @@ char *re_v(char *input, shell_info *infosh)
 	len2 += len1;
 	input2 = malloc(sizeof(char) * (len2 + 1));
 	input2[len2] = '\0';
-	input2 = replaced_input(&dot, input, input2, len2);
+	input2 = _replaced(&dot, input, input2, len2);
 	free(input);
 	free(s);
 	_freervar(&dot);
@@ -62,8 +62,9 @@ int _helper(shell_info *infosh)
 	else if (_strcmp(infosh->argc[1], "alias") == 0)
 		_helpalias();
 	else
-		_putchar(infosh->argc[0],
-		      _strlen(infosh->arg[0]));
+	{
+		write(STDERR_FILENO, infosh->argc[0],_strlen(infosh->argc[0]));
+	}
 	infosh->s = 0;
 	return (1);
 }

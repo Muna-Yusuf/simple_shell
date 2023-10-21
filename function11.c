@@ -88,6 +88,7 @@ int _execute(shell_info *infosh)
 	int st;
 	int ex;
 	char *d;
+	(void) w;
 
 	ex = _exec(infosh);
 	if (ex == -1)
@@ -116,7 +117,7 @@ int _execute(shell_info *infosh)
 	{
 		do {
 			w = waitpid(p, &st, WUNTRACED);
-		} while (!WIFEXITED(s) && !WIFSIGNALED(st));
+		} while (!WIFEXITED(st) && !WIFSIGNALED(st));
 	}
 	infosh->s = st / 256;
 	return (1);

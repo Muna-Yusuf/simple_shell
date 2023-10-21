@@ -144,7 +144,7 @@ command_list_s *_lineend(command_list_s **head, char *l)
 	n = malloc(sizeof(command_list_s));
 	if (n == NULL)
 		return (NULL);
-	n->l = l;
+	n->command = l;
 	n->next = NULL;
 	tmp = *head;
 	if (tmp == NULL)
