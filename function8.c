@@ -58,8 +58,8 @@ int _env(shell_info *infosh)
 	{
 		for (y = 0; infosh->_environ[x][y]; y++)
 			;
-		_putchar(infosh->_environ[x]);
-		_putchar("\n");
+		write(STDOUT_FILENO, infosh->_environ[x], y);
+		write(STDOUT_FILENO, "\n", 1);
 	}
 	infosh->s = 0;
 	return (1);

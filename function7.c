@@ -8,11 +8,11 @@
 
 int char_rep(char *command, int x)
 {
-	if (*(command - 1) == *x)
+	if (*(command - 1) == *command)
 	{
-		return (char_rep(command - 1, i + 1));
+		return (char_rep(command - 1, x + 1));
 	}
-	return (i);
+	return (x);
 }
 
 /**
@@ -43,7 +43,7 @@ int sep_err(char *command, int x, char com_l)
 			return (x);
 		if (com_l == '|')
 		{
-			i = sep_err(command, 0);
+			i = char_rep(command, 0);
 			if (i == 0 || i > 1)
 			{
 				return (x);
@@ -151,7 +151,7 @@ int error_ck(shell_info *infosh, char *command)
 	y = char_f(command, &x);
 	if (y == -1)
 	{
-		error_print(infosh, command, x, 0)
+		error_print(infosh, command, x, 0);
 		return (1);
 	}
 	z = sep_err(command + x, 0, *(command + x));
