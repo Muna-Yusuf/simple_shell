@@ -36,11 +36,11 @@ int _unsetenv(shell_info *infosh)
 	}
 	for (x = 0; infosh->_environ[x]; x++)
 	{
-		value = _strdup(infosh->_environ[i]);
+		value = _strdup(infosh->_environ[x]);
 		name = _strtok(value, "=");
 		if (_strcmp(name, infosh->argc[1]) == 0)
 		{
-			z = i;
+			z = x;
 		}
 		free(value);
 	}
@@ -61,7 +61,7 @@ int _unsetenv(shell_info *infosh)
 	env_re[y] = NULL;
 	free(infosh->_environ[z]);
 	free(infosh->_environ);
-	infosh->_environ = env_re
+	infosh->_environ = env_re;
 	return (1);
 }
 
@@ -87,13 +87,14 @@ int get_error(shell_info *infosh, int l)
 		error_co = error_not(datash); /* function */
 		break;
 	case 2:
+	{
 		if (_strcmp("exit", infosh->argc[0]) == 0)
 			error_co = error_exit(infosh); /* function */
 		else if (_strcmp("cd", infosh->argc[0]) == 0)
-			error = error_cd(infosh);
+			error_co = error_cd(infosh);
 		break;
 	}
-
+	}
 	if (error_co)
 	{
 		write(STDERR_FILENO, error_co, _strlen(error_co));
@@ -126,7 +127,7 @@ char *_cd_str(shell_info *infosh, char *m, char *error_co, char *value)
 	{
 		flag = malloc(3);
 		flag[0] = '-';
-		flag[1] = datash->argc[1][1];
+		flag[1] = infosh->argc[1][1];
 		flag[2] = '\0';
 		_strcat(error_co, flag);
 		free(flag);

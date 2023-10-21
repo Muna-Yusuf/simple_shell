@@ -85,7 +85,11 @@ typedef struct builtin_exe
 	int (*b)(shell_info *infosh);
 } builtin_exe_x;
 
+<<<<<<< HEAD
 int cmp_chars(char str[], const char *delim);
+=======
+char *_strdup(const char *str);
+>>>>>>> 4695d60e7a98c9d9619aaa75a5bce131193749f0
 ssize_t _getline(char **ptr, size_t *n, FILE *s);
 void _freelinelist(command_list_s **head);
 char *error_exit_shell(shell_info *datash);
