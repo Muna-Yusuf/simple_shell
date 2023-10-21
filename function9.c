@@ -37,7 +37,7 @@ int _unsetenv(shell_info *infosh)
 	for (x = 0; infosh->_environ[x]; x++)
 	{
 		value = _strdup(infosh->_environ[i]);
-		name = _strtok(varlue, "=");
+		name = _strtok(value, "=");
 		if (_strcmp(name, infosh->argc[1]) == 0)
 		{
 			z = i;

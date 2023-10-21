@@ -1,22 +1,65 @@
 #include "main.h"
 
 /**
- *
- *
- *
+ * free_data -
+ * @datash:
+ * Return:
+ */
+void free_data(shell_info *datash)
+{
+	unsigned int i;
+
+	for (i = 0; datash->_environ[i]; i++)
+	{
+		free(datash->_environ[i]);
+	}
+	free(datash->_environ);
+	free(datash->pid);
+}
+
+/**
+ * set_data -
+ * @datash:
+ * @av:
+ * Return:
+ */
+void set_data(data_shell *datash, char **argv)
+{
+	unsigned int i;
+
+	datash->argv = av;
+	datash->command = NULL;
+	datash->argc = NULL;
+	datash->s = 0;
+	datash->c = 1;
+
+	for (i = 0; environ[i]; i++)
+		;
+	datash->_environ = malloc(sizeof(char *) * (i + 1));
+	for (i = 0; environ[i]; i++)
+	{
+		datash->_environ[i] = _strdup(environ[i]);
+	}
+	datash->_environ[i] = NULL;
+	datash->pid = _itoa(getpid());
+}
+
+/**
+ * main -
+ * @ac:
+ * @av:
+ * Return:
  */
 int main(int argc, char **argv)
 {
-	shell_info *infosh;
+	shell_info datash;
 	(void) argc;
 
-	signal(SIGINT, com_get); /* bulidin fun ,signal(SIGINT, get_sigint);*/
-	commands_s(&infosh, argv); /* set_data(&datash, av)*/
-	display(&infosh);
-	_free(&infosh);
-	if (infosh.s < 0)
-	{
+	signal(SIGINT, get_sigint);
+	set_data(&datash, argv);
+	_shloop(&datash);
+	free_data(&datash);
+	if (datash.s < 0)
 		return (255);
-	}
-	return (infosh.s);
+	return (datash.s);
 }

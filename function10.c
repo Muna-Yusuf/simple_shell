@@ -154,7 +154,7 @@ int _vars_ch(command_var_r **dot, char *x, char *str, shell_info *infosh)
  */
 char *_replaced(command_var_r **dot, char *input, char *input2, int length)
 {
-	r_var *dot_in;
+	command_var_r *dot_in;
 	int x, y, z;
 
 	dot_in = *dot;
