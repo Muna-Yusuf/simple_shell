@@ -10,7 +10,7 @@ void cd_command(shell_info *infosh)
 	char command_pwd[PATH_MAX];
 	char *dirct, *_pwd, *_pwd_cp;
 
-	getcwd(command_pwd, sizeof(commmand_pwd));/*function)*/
+	getcwd(command_pwd, sizeof(command_pwd));/*function)*/
 	_pwd = _strdup(command_pwd);
 	set_env("OLDPWD", _pwd, infosh);
 	dirct = infosh->argc[1]; /*argc*/
@@ -138,7 +138,7 @@ void cd_command_home(shell_info *infosh)
 	char *_pwd_p, *p_home;
 
 	getcwd(pwd_command, sizeof(pwd_command)); /* function */
-	_pwd_p = strdup(pwd_command);
+	_pwd_p = _strdup(pwd_command);
 
 	p_home = _getenv("HOME", infosh->_environ);
 

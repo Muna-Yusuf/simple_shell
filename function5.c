@@ -12,7 +12,7 @@ char **tokenization(char *command)
 	char **tokens;
 	char *tok;
 
-	size = BUFSIZE_x;
+	size = BUFSIZE_X;
 	tokens = malloc(sizeof(char *) * (size));
 	if (tokens == NULL)
 	{
@@ -25,7 +25,7 @@ char **tokenization(char *command)
 	{
 		if (m == size)
 		{
-			size += TOK_BUFSIZE;
+			size += BUFSIZE_X;
 			tokens = _reallocdup(tokens, m, sizeof(char *) * size);
 			if (tokens == NULL)
 			{
@@ -33,7 +33,7 @@ char **tokenization(char *command)
 				exit(EXIT_FAILURE);
 			}
 		}
-		tok = _strtok(NULL, TOK_DELIM);
+		tok = _strtok(NULL, DELIMITER);
 		tokens[m] = tok;
 	}
 	return (tokens);
@@ -52,17 +52,17 @@ int (*get_builtin(char *cmd))(shell_info *)
 		{"setenv", _setenv},
 		{"unsetenv", _unsetenv},
 		{"cd", shell_command},
-		{"help", _help},
+		{"help", _helper},
 		{NULL, NULL}
 	};
 	int m;
 
-	for (m = 0; builtin[m].name; m++)
+	for (m = 0; builtin[m].command; m++)
 	{
-		if (_strcmp(builtin[m].name, cmd) == 0)
+		if (_strcmp(builtin[m].command, cmd) == 0)
 			break;
 	}
-	return (builtin[m].p);
+	return (builtin[m].b);
 }
 
 /**

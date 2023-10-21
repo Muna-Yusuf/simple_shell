@@ -107,7 +107,7 @@ void _node_add(list_s **head_s, command_list_s **head_l, char *command)
 void _node_next(list_s **lists, command_list_s **listl, shell_info *infosh)
 {
 	int m;
-	list_s *s;
+	list_s *sm;
 	command_list_s *l;
 
 	m = 1;

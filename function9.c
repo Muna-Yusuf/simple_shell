@@ -73,7 +73,7 @@ int _unsetenv(shell_info *infosh)
  */
 int get_error(shell_info *infosh, int l)
 {
-	char *error_co
+	char *error_co;
 
 	switch (l)
 	{
@@ -84,12 +84,12 @@ int get_error(shell_info *infosh, int l)
 		error_co = error_126(infosh);
 		break;
 	case 127:
-		error_co = error_not(datash); /* function */
+		error_co = error_not_found(infosh);
 		break;
 	case 2:
 	{
 		if (_strcmp("exit", infosh->argc[0]) == 0)
-			error_co = error_exit(infosh); /* function */
+			error_co = error_exit_shell(infosh);
 		else if (_strcmp("cd", infosh->argc[0]) == 0)
 			error_co = error_cd(infosh);
 		break;

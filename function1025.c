@@ -68,3 +68,30 @@ int _helper(shell_info *infosh)
 	infosh->s = 0;
 	return (1);
 }
+
+/**
+ * cmp_chars -
+ * @str:
+ * @delim:
+ *
+ * Return:
+ */
+int cmp_chars(char str[], const char *delim)
+{
+	unsigned int x, y, z;
+
+	for (x = 0, z = 0; str[x]; x++)
+	{
+		for (y = 0; delim[y]; y++)
+		{
+			if (str[x] == delim[y])
+			{
+				z++;
+				break;
+			}
+		}
+	}
+	if (x == z)
+		return (1);
+	return (0);
+}

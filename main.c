@@ -23,7 +23,7 @@ void free_data(shell_info *datash)
  * @av:
  * Return:
  */
-void set_data(data_shell *datash, char **argv)
+void set_data(shell_info *datash, char **argv)
 {
 	unsigned int i;
 

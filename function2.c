@@ -76,29 +76,3 @@ int _strlen(const char *s)
 	;
 	return (len);
 }
-
-/**
- * cmp_chars - function to compare
- * @str: char
- * @delim: char
- * Return: 0 or 1
- */
-int cmp_chars(char str[], const char *delim)
-{
-	unsigned int m, j, n;
-
-	for (m = 0, n = 0; str[m]; m++)
-	{
-		for (j = 0; delim[j]; j++)
-		{
-			if (str[m] == delim[j])
-			{
-				n++;
-				break;
-			}
-		}
-	}
-	if (m == n)
-		return (1);
-	return (0);
-}

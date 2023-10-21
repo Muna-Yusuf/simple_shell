@@ -56,7 +56,7 @@ int sep_err(char *command, int x, char com_l)
 			return (x);
 		if (com_l == '&')
 		{
-			i = sep_err(command, 0);
+			i = char_rep(command, 0);
 			if (i == 0 || i > 1)
 				return (i);
 		}
@@ -119,7 +119,7 @@ void error_print(shell_info *infosh, char *command, int x, int bool)
 	l = _strlen(infosh->argv[0] + _strlen(c)); /* argv or argc */
 	l += _strlen(m1) + _strlen(m2) + _strlen(m3) + 2;
 
-	m_error = malloc(sizeof(char) * (length + 1));
+	m_error = malloc(sizeof(char) * (l + 1));
 	if (m_error == 0)
 	{
 		free(c);
