@@ -116,6 +116,7 @@ char *error_exit_shell(shell_info *datash);
 int _cdir(char *path, int *x);
 char *_wh(char *cmd, char **_environ);
 void cd_command(shell_info *infosh);
+int _vars_ch(command_var_r **dot, char *x, char *str, shell_info *infosh);
 void cd_command2(shell_info *infosh);
 void cd_command_perv(shell_info infosh);
 void cd_command_home(shell_info infosh);

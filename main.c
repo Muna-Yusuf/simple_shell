@@ -27,7 +27,7 @@ void set_data(data_shell *datash, char **argv)
 {
 	unsigned int i;
 
-	datash->argv = av;
+	datash->argv = argv;
 	datash->command = NULL;
 	datash->argc = NULL;
 	datash->s = 0;
