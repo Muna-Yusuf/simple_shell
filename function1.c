@@ -21,7 +21,7 @@ void _free(shell_info *infosh)
  * @argv: char.
  * Return: void.
  */
-void commands_s(shell_info infosh, char **argv)
+void commands_s(shell_info *infosh, char **argv)
 {
 	unsigned int m;
 
