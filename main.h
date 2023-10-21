@@ -88,7 +88,7 @@ typedef struct builtin_exe
 int _helper(shell_info *infosh);
 char *_strdup(const char *str);
 char **split_line(char *input);
-int split_commands(shell_info *infosh, char *command);
+int split_commands(shell_info *infosh, char *command); /**/
 void go_next(list_s **list_s, command_list_s **list_l, shell_info *datash);
 char *re_v(char *input, shell_info *infosh);
 void get_sigint(int sig);
@@ -153,7 +153,7 @@ int _exitx(shell_info *infosh);
 char *_readline(int *x);
 void _bringline(char **ptr, size_t *n, char *b, size_t k);
 int _strcmp(char *str1, char *str2);
-int _putchar(char c);
+int _putchar(char *c);
 char *_strcpy(char *dest, char *src);
 int _strlen(const char *s);
 char *_strchr(char *s, char c);

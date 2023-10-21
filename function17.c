@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * go_next -
- * @list_s:
- * @list_l:
- * @datash:
- * Return:
+ * go_next - function.
+ * @listx: struct.
+ * @list_l: strcut.
+ * @datash: strcut.
+ * Return: void
  */
 void go_next(list_s **listx, command_list_s **list_l, shell_info *datash)
 {
@@ -40,10 +40,10 @@ void go_next(list_s **listx, command_list_s **list_l, shell_info *datash)
 }
 
 /**
- * split_commands -
- * @datash:
- * @input:
- * Return:
+ * split_commands - function.
+ * @infosh: sturct.
+ * @command: char.
+ * Return: int.
  */
 int split_commands(shell_info *infosh, char *command)
 {
@@ -75,7 +75,8 @@ int split_commands(shell_info *infosh, char *command)
 	return (1);
 }
 
-/* split_line - function to tokenize
+/**
+ * split_line - function to tokenize
  * @input: char
  * Return: char
 */

@@ -128,8 +128,8 @@ int _vars_ch(command_var_r **dot, char *x, char *str, shell_info *infosh)
 			}
 			else if (x[i + 1] == '$')
 			{
-				_addrvar(dot, 2, infosh->pid, d);
-			       	i++;
+				_addrvar(dot, 2, infosh->pid);
+				i++;
 			}
 			else if (x[i + 1] == '\n')
 				_addrvar(dot, 0, NULL, 0);

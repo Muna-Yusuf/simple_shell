@@ -124,7 +124,7 @@ int _execute(shell_info *infosh)
 }
 
 /**
- * _exit - function to exit the shell
+ * _exitx - function to exit the shell
  * @infosh: of type data_shell
  * Return: 0 or 1
  */

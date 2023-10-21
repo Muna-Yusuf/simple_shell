@@ -63,18 +63,18 @@ int _helper(shell_info *infosh)
 		_helpalias();
 	else
 	{
-		write(STDERR_FILENO, infosh->argc[0],_strlen(infosh->argc[0]));
+		write(STDERR_FILENO, infosh->argc[0], _strlen(infosh->argc[0]));
 	}
 	infosh->s = 0;
 	return (1);
 }
 
 /**
- * cmp_chars -
- * @str:
- * @delim:
+ * cmp_chars - function
+ * @str: char
+ * @delim: char
  *
- * Return:
+ * Return: int
  */
 int cmp_chars(char str[], const char *delim)
 {

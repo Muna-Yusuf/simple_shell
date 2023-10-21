@@ -70,7 +70,7 @@ void _shloop(shell_info *datash)
 	}
 }
 
-/*
+/**
  * error_not_found - function checks no error
  * @datash: shell_info
  * Return: char
