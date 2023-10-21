@@ -94,7 +94,7 @@ int _execute(shell_info *infosh)
 		return (1);
 	if (ex == 0)
 	{
-		d = _which(infosh->argc[0], infosh->_environ);
+		d = _wh(infosh->argc[0], infosh->_environ);
 		if (_errcheck(d, infosh) == 1)
 			return (1);
 	}
@@ -102,7 +102,7 @@ int _execute(shell_info *infosh)
 	if (p == 0)
 	{
 		if (ex == 0)
-			d = _which(infosh->argc[0], infosh->_environ);
+			d = _wh(infosh->argc[0], infosh->_environ);
 		else
 			d = infosh->argc[0];
 		execve(d + ex, infosh->argc, infosh->_environ);
@@ -116,7 +116,7 @@ int _execute(shell_info *infosh)
 	{
 		do {
 			w = waitpid(p, &st, WUNTRACED);
-		} while (!WIFEXITED(state) && !WIFSIGNALED(st));
+		} while (!WIFEXITED(s) && !WIFSIGNALED(st));
 	}
 	infosh->s = st / 256;
 	return (1);
@@ -127,7 +127,7 @@ int _execute(shell_info *infosh)
  * @infosh: of type data_shell
  * Return: 0 or 1
  */
-int _exit(shell_info *infosh)
+int _exitx(shell_info *infosh)
 {
 	unsigned int st;
 	int d;

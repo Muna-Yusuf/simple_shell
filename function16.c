@@ -39,16 +39,16 @@ char *_nocomment(char *in)
 void _shloop(shell_info *datash)
 {
 	int l, i;
-	char *in;
+	char *command;
 
 	l = 1;
 	while (l == 1)
 	{
 		write(STDIN_FILENO, "^-^ ", 4);
-		command = read_line(&i);
+		command = _readline(&i);
 		if (i != -1)
 		{
-			command = without_comment(command);
+			command = _nocomment(command);
 			if (command == NULL)
 				continue;
 			if (error_ck(datash, command) == 1)
@@ -57,7 +57,7 @@ void _shloop(shell_info *datash)
 				free(command);
 				continue;
 			}
-			command = rep_var(command, datash);
+			command = re_v(command, datash);
 			l = split_commands(datash, command);
 			datash->c += 1;
 			free(command);
@@ -141,5 +141,5 @@ char *error_exit_shell(shell_info *datash)
 
 int _putchar(char c)
 {
-	return (STDOUT_FILENO, &c, _strlen(c));
+	return (write(STDOUT_FILENO, &c, _strlen(c)));
 }

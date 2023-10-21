@@ -71,7 +71,7 @@ int check_digit(const char *s)
 void _strrev(char *s)
 {
 	int c = 0, m, k;
-	char *str, temp;
+	char *str, tmp;
 
 	while (c >= 0)
 	{
@@ -99,7 +99,7 @@ void _strrev(char *s)
 char *_itoa(int n)
 {
 	unsigned int m;
-	int len = get_len(n);
+	int len = _numlen(n);
 	char *b;
 
 	b = malloc(sizeof(char) * (len + 1));

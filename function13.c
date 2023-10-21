@@ -89,7 +89,7 @@ int _execline(shell_info *datash)
 	builtin = get_builtin(datash->argc[0]);
 	if (builtin != NULL)
 		return (builtin(datash));
-	return (cmd_exec(datash));
+	return (_execute(datash));
 }
 
 /**

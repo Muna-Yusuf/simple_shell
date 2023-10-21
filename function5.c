@@ -12,21 +12,21 @@ char **tokenization(char *command)
 	char **tokens;
 	char *tok;
 
-	size = TOK_BUFSIZE;
+	size = BUFSIZE_x;
 	tokens = malloc(sizeof(char *) * (size));
 	if (tokens == NULL)
 	{
 		write(STDERR_FILENO, ": allocation error\n", 18);
 		exit(EXIT_FAILURE);
 	}
-	tok = _strtok(command, TOK_DELIM);
+	tok = _strtok(command, DELIMITER);
 	tokens[0] = tok;
 	for (m = 1; tok != NULL; m++)
 	{
 		if (m == size)
 		{
 			size += TOK_BUFSIZE;
-			tokens = _reallocdp(tokens, m, sizeof(char *) * size);
+			tokens = _reallocdup(tokens, m, sizeof(char *) * size);
 			if (tokens == NULL)
 			{
 				write(STDERR_FILENO, ": allocation error\n", 18);
@@ -46,14 +46,14 @@ char **tokenization(char *command)
  */
 int (*get_builtin(char *cmd))(shell_info *)
 {
-	builtin_t builtin[] = {
-		{ "env", _env },
-		{ "exit", _exit },
-		{ "setenv", _setenv },
-		{ "unsetenv", _unsetenv },
-		{ "cd", shell_command },
-		{ "help", get_help },
-		{ NULL, NULL }
+	builtin_exe_x builtin[] = {
+		{"env", _env},
+		{"exit", _exitx},
+		{"setenv", _setenv},
+		{"unsetenv", _unsetenv},
+		{"cd", shell_command},
+		{"help", _help},
+		{NULL, NULL}
 	};
 	int m;
 
@@ -62,7 +62,7 @@ int (*get_builtin(char *cmd))(shell_info *)
 		if (_strcmp(builtin[m].name, cmd) == 0)
 			break;
 	}
-	return (builtin[m].f);
+	return (builtin[m].p);
 }
 
 /**
@@ -116,7 +116,7 @@ char *_wh(char *cmd, char **_environ)
 		m = 0;
 		while (token != NULL)
 		{
-			if (is_cdir(path, &m))
+			if (_cdir(path, &m))
 				if (stat(cmd, &st) == 0)
 					return (cmd);
 			len_dir = _strlen(token);

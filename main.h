@@ -87,17 +87,15 @@ typedef struct builtin_exe
 
 
 ssize_t _getline(char **ptr, size_t *n, FILE *s);
-void _freelinelist(command_list_S **head);
+void _freelinelist(command_list_s **head);
 char *error_exit_shell(shell_info *datash);
 char *error_not_found(shell_info *datash);
 void _shloop(shell_info *datash);
 void free_data(shell_info *datash);
-void set_data(data_shell *datash, char **argv);
-
+void set_data(shell_info *datash, char **argv);
 list_s *_sepend(list_s **head, char s);
 void _freeseplist(list_s **head);
 command_list_s *_lineend(command_list_s **head, char *l);
-void _freelinelist(command_list_s **head);
 command_var_r *_addrvar(command_var_r **head, int var, char *value, int val);
 void _freervar(command_var_r **head);
 int _execline(shell_info *datash);
@@ -145,7 +143,7 @@ char *_replaced(command_var_r **dot, char *input, char *input2, int length);
 int _exec(shell_info *datash);
 int _errcheck(char *d, shell_info *datash);
 int _execute(shell_info *datash);
-int _exit(shell_info *infosh);
+int _exitx(shell_info *infosh);
 char *_readline(int *x);
 void _bringline(char **ptr, size_t *n, char *b, size_t k);
 int _strcmp(char *str1, char *str2);
@@ -166,5 +164,7 @@ void _node_next(list_s **lists, command_list_s **listl, shell_info *infosh);
 int token_command(shell_info *datash, char *input);
 char **tokenization(char *command);
 int (*get_builtin(char *cmd))(shell_info *);
+char *_strcat(char *dest, char *src);
+void _free(shell_info *infosh);
 
 #endif

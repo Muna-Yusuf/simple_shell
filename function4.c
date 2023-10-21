@@ -78,7 +78,7 @@ void _node_add(list_s **head_s, command_list_s **head_l, char *command)
 	int m;
 	char *l;
 
-	command = swap_char(command, 0);
+	command = swapping(command, 0);
 	for (m = 0; command[m]; m++)
 	{
 		if (command[m] == ';')
@@ -91,7 +91,7 @@ void _node_add(list_s **head_s, command_list_s **head_l, char *command)
 	}
 	l = _strtok(command, ";|&");
 	do {
-		l = swap_char(l, 1);
+		l = swapping(l, 1);
 		_lineend(head_l, l);
 		l = _strtok(NULL, ";|&");
 	} while (l != NULL);
@@ -111,28 +111,28 @@ void _node_next(list_s **lists, command_list_s **listl, shell_info *infosh)
 	command_list_s *l;
 
 	m = 1;
-	s = *lists; /*status   s*/
+	sm = *lists;
 	l = *listl;
-	while (s != NULL && m)
+	while (sm != NULL && m)
 	{
-		if (infosh->status == 0)
+		if (infosh->s == 0)
 		{
-			if (s->sep == '&' || s->sep == ';')
+			if (sm->sep == '&' || sm->sep == ';')
 				m = 0;
-			if (s->sep == '|')
-				l = l->next, s = s->next;
+			if (sm->sep == '|')
+				l = l->next, sm = sm->next;
 		}
 		else
 		{
-			if (s->sep == '|' || s->sep == ';')
+			if (sm->sep == '|' || sm->sep == ';')
 				m = 0;
-			if (s->sep == '&')
-				l = l->next, s = s->next;
+			if (sm->sep == '&')
+				l = l->next, sm = sm->next;
 		}
-		if (s != NULL && !m)
-			s = s->next;
+		if (sm != NULL && !m)
+			sm = sm->next;
 	}
-	*lists = s;
+	*lists = sm;
 	*listl = l;
 }
 
@@ -150,15 +150,15 @@ int token_command(shell_info *datash, char *input)
 
 	head_s = NULL;
 	head_l = NULL;
-	add_nodes(&head_s, &head_l, input);
+	_node_add(&head_s, &head_l, input);
 	list_s = head_s;
 	list_l = head_l;
 	while (list_l != NULL)
 	{
-		datash->input = list_l->line;
-		datash->argc = split_line(datash->input);
-		flag = exec_line(datash);
-		free(datash->args);
+		datash->command = list_l->command;
+		datash->argc = split_line(datash->command);
+		flag = _execline(datash);
+		free(datash->argc);
 		if (flag == 0)
 			break;
 		go_next(&list_s, &list_l, datash);

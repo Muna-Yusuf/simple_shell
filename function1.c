@@ -5,14 +5,12 @@
  * @infosh: struct.
  * Return: void.
  */
-void _free(shell_info infosh)
+void _free(shell_info *infosh)
 {
 	unsigned int m;
 
 	for (m = 0; infosh->_environ[m]; m++)
-	{
 		free(infosh->_environ[m]);
-	}
 	free(infosh->_environ);
 	free(infosh->pid);
 }

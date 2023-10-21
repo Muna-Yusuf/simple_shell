@@ -24,9 +24,9 @@ void *_realloc(void *ptr, unsigned int size, unsigned int newsize)
 	if (nptr == NULL)
 		return (NULL);
 	if (newsize < size)
-		_memcopy(nptr, ptr, newsize);
+		_memcpy(nptr, ptr, newsize);
 	else
-		_memcopy(nptr, ptr, size);
+		_memcpy(nptr, ptr, size);
 	free(ptr);
 	return (nptr);
 }

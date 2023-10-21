@@ -21,8 +21,7 @@ char *envir_error(shell_info *infosh)
 		free(value);
 		return (NULL);
 	}
-
-	_strcpy(error_co, infosh->agrv[0]);
+	_strcpy(error_co, infosh->argv[0]);
 	_strcat(error_co, ": ");
 	_strcat(error_co, value);
 	_strcat(error_co, ": ");
@@ -78,7 +77,7 @@ void _enviro_check(command_var_r **dot, char *i, shell_info *infosh)
 	_enviro_b = infosh->_environ;
 	for (r = 0; _enviro_b[r]; r++)
 	{
-		for (j = 1, c = 0; _enviro[r][c]; c++)
+		for (j = 1, c = 0; _enviro_b[r][c]; c++)
 		{
 			if (_enviro_b[r][c] == '=')
 			{
@@ -115,7 +114,7 @@ int _vars_ch(command_var_r **dot, char *x, char *str, shell_info *infosh)
 {
 	int i, list, d;
 
-	list = _strlen(srt);
+	list = _strlen(str);
 	d = _strlen(infosh->pid);
 
 	for (i = 0; x[i]; i++)
@@ -123,9 +122,15 @@ int _vars_ch(command_var_r **dot, char *x, char *str, shell_info *infosh)
 		if (x[i] == '$')
 		{
 			if (x[i + 1] == '?')
-				_addrvar(dot, 2, srt, list), i++;
+			{
+				_addrvar(dot, 2, str, list);
+				i++;
+			}
 			else if (x[i + 1] == '$')
-				_addrvar(dot, 2, infosh->pid, d), i++;
+			{
+				_addrvar(dot, 2, infosh->pid, d);
+			       	i++;
+			}
 			else if (x[i + 1] == '\n')
 				_addrvar(dot, 0, NULL, 0);
 			else if (x[i + 1] == '\0')

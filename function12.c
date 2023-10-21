@@ -93,7 +93,7 @@ list_s *_sepend(list_s **head, char s)
 	list_s *n, *tmp;
 
 	n = malloc(sizeof(list_s));
-	if (new == NULL)
+	if (n == NULL)
 		return (NULL);
 	n->sep = s;
 	n->next = NULL;
