@@ -32,9 +32,7 @@ void cd_command(shell_info *infosh)
 	{
 		_pwd_cp = _strtok(NULL, "\0");
 		if (_pwd_cp != NULL)
-		{
 			_strrev(_pwd_cp);
-		}
 	}
 	if (_pwd_cp != NULL)
 	{
