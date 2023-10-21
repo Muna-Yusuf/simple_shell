@@ -153,7 +153,7 @@ int _exitx(shell_info *infosh);
 char *_readline(int *x);
 void _bringline(char **ptr, size_t *n, char *b, size_t k);
 int _strcmp(char *str1, char *str2);
-int _putchar(char *c);
+int _putchar(char c);
 char *_strcpy(char *dest, char *src);
 int _strlen(const char *s);
 char *_strchr(char *s, char c);
